@@ -1,0 +1,511 @@
+<!Doctype html>
+<html lang="en">
+    <head>
+        <title>Interpolated SelectionConv for Spherical Images and Surfaces</title>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="author" content="David Hart">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="icon" type="image/png" href="data/bunny.png"/> -->
+
+        <link rel="stylesheet" type="text/css" href="css/style_project_page.css?cache=7733391418498779679">
+        <link href="https://fonts.googleapis.com/css?family=Arvo|Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/@glidejs/glide/dist/css/glide.core.min.css">
+        <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+        <script src="https://unpkg.com/@glidejs/glide"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" id="">
+		</script>
+		<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+         <script type="text/x-mathjax-config;executed=true">
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+        </script>
+        <style type="text/css">
+            .side-text {
+                width:60%;
+                display:inline-block;
+                vertical-align:top;
+            }
+            .side-image {
+                width: 38%;
+                display: inline-block;
+                vertical-align: top;
+            }
+            .big-side-text {
+                width:43%;
+                display:inline-block;
+                vertical-align:top;
+            }
+            .big-side-image {
+                width: 55%;
+                display: inline-block;
+                vertical-align: top;
+            }
+            .controls {
+                margin-bottom: 10px;
+            }
+            .left-controls {
+                display: inline-block;
+                vertical-align: top;
+                width: 80%;
+            }
+            .right-controls {
+                display: inline-block;
+                vertical-align: top;
+                width: 19%;
+                text-align: right;
+            }
+            .render_window {
+                display: inline-block;
+                vertical-align: middle;
+                box-shadow: 1px 0px 5px black;
+                margin-right: 10px;
+                margin-bottom: 10px;
+                width: calc(33% - 10px);
+            }
+            .progress {
+                background: #666;
+                position: relative;
+                height: 5px;
+                margin-bottom: -5px;
+                display: none;
+            }
+            .glide__slide:hover {cursor: grab;}
+            .glide__slide:active {cursor: grabbing;}
+            .glide__slide img {width: 90%;}
+            .glide__bullets {
+                text-align: center;
+            }
+            .glide__bullet--active {
+                color: #aaa;
+            }
+
+            @media (max-width: 400px) {
+                .render_window {
+                    display: block;
+                    width: 90%;
+                    margin: 10px auto;
+                }
+            }
+            @media (max-width: 700px) {
+                .side-image {
+                    display: block;
+                    width: 80%;
+                    margin: 10px auto;
+                }
+                .side-text {
+                    display: block;
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="section">
+
+		<h1 class="project-title" >
+                Interpolated SelectionConv for Spherical Images and Surfaces
+        </h1>
+            <div class="authors">
+                <a href=https://davidhartcv.com target="_blank" rel="noopener noreferrer">
+                    David Hart
+                </a>
+                ,
+                <a href=https://www.linkedin.com/in/mikeswhitney33/ target="_blank" rel="noopener noreferrer">
+                    Michael Whitney
+                </a>
+                , 
+                <a href=https://science.byu.edu/directory/bryan-morse target="_blank" rel="noopener noreferrer">
+                    Bryan Morse
+                </a>
+            </div>
+
+            <div class="affiliations">
+                <span>Brigham Young University, Provo, Utah, USA</span> &nbsp; &nbsp;<br/>
+            </div>
+
+            <div class="project-conference">                
+                To Be Presented at 
+		<a href=https://wacv2023.thecvf.com/home target="_blank" rel="noopener noreferrer">WACV 2023</a>
+            </div>
+
+            <div class="project-icons">
+                <a href="https://github.com/davidmhart/interpolated-selectionconv" target="_blank" rel="noopener noreferrer">
+                    <i class="fa fa-file-text"></i> <br/>
+                    Paper
+                </a>
+				<!--
+				<a href="https://github.com/davidmhart/SelectionConv">
+                    <i class="fa fa-file"></i> <br/>
+                    Supplemental
+                </a>
+				-->
+                <a href="https://github.com/davidmhart/interpolated-selectionconv">
+                    <i class="fa fa-github"></i> <br/>
+                    Code
+                </a>
+				<a href="https://drive.google.com/file/d/1EToYb19g47nYzrgg66qnBMaubzCLZef0/view?usp=sharing">
+                    <i class="fa fa-video-camera"></i> <br/>
+                    Video
+                </a>
+				
+            </div>
+            
+        <div class="content">
+            <p>
+                We present Interpolated SelectionConv, a method for transfering the weights 2D CNNs to graph networks that operate specifically for surfaces, allowing for applications in spherical images and 3D meshes.
+            </p>
+			<p>
+				This paper builds off our previous work <b>SelectionConv</b>, which you can learn more about at our <a href="https://davidmhart.github.io/SelectionConv/">project page</a>.
+			</p>
+        </div>
+            
+        <div class="section-title">Method</div>
+            
+            <div class="side-text">
+                <p>
+					In the original SelectionConv work, edges were given the selection of the cardinal or ordinal direction most closely aligned with the spatial relationship between the respective pixels or nodes. 
+                    With general sampling patterns, however, node relationships do not lie so cleanly along specific axes. 
+                    Thus, it is beneficial to be able to interpolate between multiple selections. 
+                    To do this, we first assign multiple edges to a single node with each edge having a different selection (i.e., we assign the same source and target node to multiple adjacency matrices). 
+                    Then, we assign each of those edges an edge weight that determines how much the spatial relationship between the nodes matches the given direction.
+				</p>       
+
+                <p>
+                    For example, if an angular interpolation is used, the edge between the given source and target node shown in diagram would have selections of both 2 and 3. 
+                    Specifically, it would have selection weights of \( w_2 = \frac{\theta_3}{\theta_2+\theta_3} \) and \( w_3 = 1 - w_2 \).
+                </p>
+                
+
+            </div>
+			<div class="side-image">
+                <img src="images/Interpolation-Angle.png" style="width:85%;">
+            </div>
+            
+            
+            <div class="big-side-image">
+                <img src="images/Sphere_Planar.png" style="width:95%;">
+            </div>
+            
+            <div class="big-side-text">
+                <p>
+					By using interpolated selections, our graph structures can be defined for be generic point cloud structures, such as those generated from sampling a spherical surface or a 3D mesh.
+                    By defining the graph structure in 3D space, and then making selection assignments based on the local planar projection for each individual node, our interpolated SelectionConv can accurately represent oriented convolution on surfaces.
+                    This creates one cohesive framework that does not require designing a specific projection for each unique surface.
+                    Additionally, just like the original SelectionConv we can transfer weights from networks trained on 2D images to our graph-based network.
+                </p>       
+
+            </div>
+			
+			
+			
+
+        <div class="section-title">Results</div>
+            <div class="content">
+                <p>
+                    Our approach is general enough to work many 2D network architecture and tasks. Thus, we illustrate the results of transferring 2D weights for different tasks to our networks for spherical images and 3D meshes.
+				</p>                	        
+            </div>
+        
+            <h3>Spherical Style Transfer</h3>
+		    
+            <div class="content">
+                <p>
+				    Our method can effectively stylize spherical images, without causing seams or distortion. It has fewer artifacts than the naive approach or the original SelectionConv method, especially near the poles of the image.
+				</p>
+                
+			<table style="text-align:center;margin-left:auto;margin-right:auto;"> <tbody>
+				<tr>
+				<td> <b> Original </td> <td> <b> Naive </td>
+				</tr>
+				<tr>
+				<td>
+				<iframe width=450 height=300 allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=images/test360_ex1.jpg&amp;preview=images/test360_ex3.jpg"></iframe>
+				</td>
+				<td>
+				<iframe width=450 height=300 allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=images/spherical3_naive.jpg&amp;preview=images/spherical3_naive.jpg"></iframe>
+				</td>
+				</tr>
+				<tr>
+				<td> <b> SelectionConv </td> <td> <b> Interpolated SelectionConv </td>
+				</tr>
+				<tr>
+				<td>
+				<iframe width=450 height=300 allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=images/spherical3_cubemap.jpg&amp;preview=images/spherical3_cubemap.jpg"></iframe>
+				</td>
+				<td>
+				<iframe width=450 height=300 allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=images/spherical3_ours.jpg&amp;preview=images/spherical3_ours.jpg"></iframe>
+				</td>
+				</tr>
+			</tbody> </table>
+			
+			<p>
+				Additional examples are presented below.
+			</p>
+			
+			
+			<table style="text-align:center;margin-left:auto;margin-right:auto;"> <tbody>
+				<tr>
+				<td> <b> Original </td> <td> <b> Interpolated SelectionConv </td>
+				</tr>
+				<tr>
+				<td>
+				<iframe width=450 height=300 allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=images/test360_ex1.jpg&amp;preview=images/test360_ex1.jpg"></iframe>
+				</td>
+				<td>
+				<iframe width=450 height=300 allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=images/spherical1_ours.jpg&amp;preview=images/spherical1_ours.jpg"></iframe>
+				</td>
+				</tr>
+			</tbody> </table>
+			
+			
+			<table style="text-align:center;margin-left:auto;margin-right:auto;"> <tbody>
+				<tr>
+				<td> <b> Original </td> <td> <b> Interpolated SelectionConv </td>
+				</tr>
+				<tr>
+				<td>
+				<iframe width=450 height=300 allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=images/test360_ex2.jpg&amp;preview=images/test360_ex2.jpg"></iframe>
+				</td>
+				<td>
+				<iframe width=450 height=300 allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=images/spherical2_ours.jpg&amp;preview=images/spherical2_ours.jpg"></iframe>
+				</td>
+				</tr>
+			</tbody> </table>
+			
+			
+			<table style="text-align:center;margin-left:auto;margin-right:auto;"> <tbody>
+				<tr>
+				<td> <b> Original </td> <td> <b> Interpolated SelectionConv </td>
+				</tr>
+				<tr>
+				<td>
+				<iframe width=450 height=300 allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=images/test360_ex4.jpg&amp;preview=images/test360_ex4.jpg"></iframe>
+				</td>
+				<td>
+				<iframe width=450 height=300 allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=images/spherical4_ours.jpg&amp;preview=images/spherical4_ours.jpg"></iframe>
+				</td>
+				</tr>
+			</tbody> </table>
+			
+			<!--
+			
+			<table style="text-align:center"> <tbody>
+				<tr>
+				<td> <b> Original </td> <td> <b> Interpolated SelectionConv </td>
+				</tr>
+				<tr>
+				<td>
+				<iframe width=450 height=300 allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=images/test360_ex5.jpg&amp;preview=images/test360_ex5.jpg"></iframe>
+				</td>
+				<td>
+				<iframe width=450 height=300 allowfullscreen style="border-style:none;" src="https://cdn.pannellum.org/2.5/pannellum.htm#panorama=images/spherical5_ours.jpg&amp;preview=images/spherical5_ours.jpg"></iframe>
+				</td>
+				</tr>
+			</tbody> </table>
+		
+			-->
+		
+            </div>
+            
+            <h3>Spherical Segmentation</h3>
+		    
+            <div class="content">
+                <p>
+				    We evaluate our method in perfoming segmentation using the Stanford 2D-3D-S dataset. It consists of equirectangular images of various indoor scenes with 13 different classes. 
+                    We compare to various methods designed specifcally for spheres.
+                    Even after a simple direct transfer, our approach is competive with the state-of-the-art methods.
+				</p>
+            </div>
+                
+            <table style="border: 1px solid #dddddd;margin-left:auto;margin-right:auto;">
+                <tr style="font-size: 1.5em; background-color:#eee">
+                    <th style="text-align:center;"> Method </th>
+                    <th style="text-align:center;padding: 0 15px;"> Input </th>
+                    <th style="text-align:center;padding: 0 15px;"> mIOU (Direct Transfer) </th>
+                    <th style="text-align:center;padding: 0 15px;"> mIOU (Fine-Tuned) </th>
+                </tr>
+                <tr style="font-size: 1.25em">
+                    <td> SelectionConv Cubemap </td>
+                    <td style="text-align:center"> RGB </td>
+                    <td style="text-align:center"> 36.3% </td>
+                    <td style="text-align:center"> - </td>
+                </tr>
+                <tr style="font-size: 1.25em">
+                    <td> UGSCNN (<i> Jiang et al. </i>) </td>
+                    <td style="text-align:center"> RGB-D </td>
+                    <td style="text-align:center"> - </td>
+                    <td style="text-align:center"> 38.3% </td>
+                </tr>
+                <tr style="font-size: 1.25em">
+                    <td> GaugeNet (<i> Cohen et al. </i>) </td>
+                    <td style="text-align:center"> RGB-D </td>
+                    <td style="text-align:center"> - </td>
+                    <td style="text-align:center"> 39.4% </td>
+                </tr>
+                <tr style="font-size: 1.25em" >
+                    <td> <b> Interpolated SelectionConv </td>
+                    <td style="text-align:center"> RGB-D </td>
+                    <td style="text-align:center"> <b> 39.9% </td>
+                    <td style="text-align:center"> <b> 41.4% </td>
+                </tr>
+                <tr style="font-size: 1.25em">
+                    <td> HexRUNet (<i> Zhang et al. </i>) </td>
+                    <td style="text-align:center"> RGB-D </td>
+                    <td style="text-align:center"> - </td>
+                    <td style="text-align:center"> 43.3% </td>
+                </tr>
+                <tr style="font-size: 1.25em">
+                    <td> TangentIms (<i> Eder et al. </i>) </td>
+                    <td style="text-align:center"> RGB-D </td>
+                    <td style="text-align:center"> 38.9% </td>
+                    <td style="text-align:center"> 51.9% </td>
+                </tr>
+            </table>
+                    
+                
+            
+            <h3>Mesh Style Transfer</h3>
+            
+            <div class="content">
+                <p>
+					Lastly, we demonstrate the ability of our method to generalize to general surfaces by stylizing 3D meshes. 
+					In the original SelectionConv work, a UV edge-pairing process was required to determine edges across seams in the texture map. This process failed to remove all artifacts along seam boundaries and was time consuming for high-polygon-count meshes. 
+					Our new approach avoids this computationally expensive step while achieving far better consistency along UV seams
+					since the edges and selections are made in 3D space, rather than on the topologically complex 2D texture map.
+				</p>
+            </div>
+                    
+			<style>
+			model-viewer {
+			  width: 400px;
+			  height: 300px;
+			}
+			</style>
+			
+			<table style="text-align:center;margin-left:auto;margin-right:auto;"> <tbody>
+				<tr>
+				<td> <b> Original </td> <td> <b> Naive </td>
+				</tr>
+				<tr>
+				<td>
+				<model-viewer alt="Teddy Bear" src="meshes/teddy.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				</td>
+				<td>
+				<model-viewer alt="Teddy Bear Naive Stylization" src="meshes/teddy_naive.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				</td>
+				</tr>
+				<tr>
+				<td> <b> SelectionConv </td> <td> <b> Interpolated SelectionConv </td>
+				</tr>
+				<tr>
+				<td>
+				<model-viewer alt="Teddy Bear SelectionConv Stylization" src="meshes/teddy_selectionconv.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				</td>
+				<td>
+				<model-viewer alt="Teddy Bear Interpolated SelectionConv Stylization" src="meshes/teddy_new.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				</td>
+				</tr>
+				
+			</tbody> </table>
+			
+			<div class="content">
+                <p>
+					Additionally, our method allows users to control the number of initial sampling points, making it time invariant to the complexity of the mesh. This also provides a simple way for controlling the level of detail in the stylization on the mesh
+					while operating on high quality meshes and texture maps.
+				</p>
+            </div>
+
+			<!--
+
+			<table style="text-align:center"> <tbody>
+				<tr>
+				<td> <b> Original </td> <td> <b> Style </td>
+				</tr>
+				<tr>
+				<td>
+				<model-viewer alt="Lime" src="meshes/lime.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				</td>
+				<td>
+				<img src="images/style6.jpg" style="width:50%;"></td>
+				</tr>
+				<tr>
+				<td> <b>  Naive </td> <td> <b> Interpolated SelectionConv </td>
+				</tr>
+				<tr>
+				<td>
+				<model-viewer alt="Lime Naive Stylization" src="meshes/lime_naive.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				</td>
+				<td>
+				<model-viewer alt="Lime Interpolated SelectionConv Stylization" src="meshes/lime_ours.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				</td>
+				</tr>
+				
+			</tbody> </table>
+			
+			-->
+			
+			<table style="text-align:center;margin-left:auto;margin-right:auto;"> <tbody>
+				<tr>
+				<td> <b> Original </td> <td> <b> Style </td>
+				</tr>
+				<tr>
+				<td>
+				<model-viewer alt="Crow" src="meshes/crow.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				</td>
+				<td>
+				<img src="images/style4.jpg" style="width:50%;"></td>
+				</tr>
+				<tr>
+				<td> <b>  Naive (Low Resolution) </td> <td> <b> Interpolated SelectionConv (Low Resolution) </td>
+				</tr>
+				<tr>
+				<td>
+				<model-viewer alt="Crow Low Res Naive Stylization" src="meshes/crow_naive_lowres.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				</td>
+				<td>
+				<model-viewer alt="Crow Low Res Interpolated SelectionConv Stylization" src="meshes/crow_ours_lowres.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				</td>
+				</tr>
+				<tr>
+				<td> <b> Naive (High Resolution) </td> <td> <b> Interpolated SelectionConv (High Resolution) </td>
+				</tr>
+				<tr>
+				<td>
+				<model-viewer alt="Crow High Res Naive Stylization" src="meshes/crow_naive_highres.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				</td>
+				<td>
+				<model-viewer alt="Crow Low Res Interpolated SelectionConv Stylization" src="meshes/crow_ours_highres.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				</td>
+				</tr>
+				
+			</tbody> </table>
+                    
+			
+            </br>
+            <div class="content">
+                <p>
+					Checkout our paper and supplemental material for additional results and to learn more.
+			    </p>
+            </div>
+                    
+		<style>
+		citationblock{
+			margin: 0;
+		}
+
+		citationblock p {
+			padding: 15px;
+			background: #eee;
+			border-radius: 5px;
+		}
+		</style>
+
+
+		<citationblock>
+			<p>To be presented at WACV 2023. Citation coming soon.</p>
+		</citationblock>
+
+	</body>
+</html>
