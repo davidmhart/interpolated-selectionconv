@@ -35,8 +35,8 @@ In our paper, we evaluate spherical segmentation on the [Stanford2D-3D-S](https:
 Setup:
 - Download the [Stanford2D-3D-S](https://github.com/alexsax/2D-3D-Semantics) dataset and modify `segmentation_eval/config.py` and `segmentation_eval/config_eval.py` to point to the correct directory.
 - Download our pretrained weights and place them in the folder `graph_networks/pretrained_weights`:
-  - Trained on RGB-D planar images: [UNet_2d3ds_withDepth.pth]()
-  - Fine-tuned on spherical RGB-D images: [UNet_2d3ds_withDepth_finetuned.pth]()
+  - Trained on RGB-D planar images: [UNet_2d3ds_withDepth.pth](https://drive.google.com/file/d/1O5O_WeDONvn8pt4UTRwyI03jPCBCvNVe/view?usp=sharing)
+  - Fine-tuned on spherical RGB-D images: [UNet_2d3ds_withDepth_finetuned.pth](https://drive.google.com/file/d/1B_iOftd4YLtL9aAH8vHmPqq40GH6aVn2/view?usp=sharing)
 
 Evaluation:
 - To run the evalation using our fine-tuned weights, use `run_eval_finetuned.py`.
