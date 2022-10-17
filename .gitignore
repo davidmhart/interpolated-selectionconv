@@ -3,6 +3,16 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+graph_networks/pretrained_weights
+graph_networks/LinearStyleTransfer/models/
+graph_networks/LinearStyleTransfer/Artistic/
+
+segmentation_eval/runs/
+segmentation_eval/outputs/
+segmentation_eval/*.json
+
+mesh_data/
+
 # C extensions
 *.so
 
