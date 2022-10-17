@@ -1,7 +1,4 @@
 # Interpolated SelectionConv
-
-**This repo is currently under construction.**
-
 The original Pytorch Geometric implementation for Interpolated SelectionConv for Spherical Images and Surfaces
 
 ![](teaser.png)
