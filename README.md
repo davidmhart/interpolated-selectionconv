@@ -1,6 +1,10 @@
 # Interpolated SelectionConv
 The original Pytorch Geometric implementation for Interpolated SelectionConv for Spherical Images and Surfaces
 
+[Project Page](https://davidmhart.github.io/interpolated-selectionconv/)
+
+[Paper](http://arxiv.org/abs/2210.10123)
+
 ![](teaser.png)
 
 This code builds off our previous work [SelectionConv](https://github.com/davidmhart/SelectionConv). This page will focus primarily on experiments described in our most recent paper [Interpolated SelectionConv for Spherical Images and Surfaces]().
