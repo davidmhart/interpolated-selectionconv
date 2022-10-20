@@ -7,7 +7,7 @@ The original Pytorch Geometric implementation for Interpolated SelectionConv for
 
 ![](teaser.png)
 
-This code builds off our previous work [SelectionConv](https://github.com/davidmhart/SelectionConv). This page will focus primarily on experiments described in our most recent paper [Interpolated SelectionConv for Spherical Images and Surfaces]().
+This code builds off our previous work [SelectionConv](https://github.com/davidmhart/SelectionConv). This page will focus primarily on experiments described in our most recent paper [Interpolated SelectionConv for Spherical Images and Surfaces](http://arxiv.org/abs/2210.10123).
 
 ## Install
 This work relies heavily on the [Pytorch](https://pytorch.org/) and [Pytorch Geometric](https://www.pyg.org/) libraries. Make sure to have functioning versions of both libraries. The rest of the needed packages can be installed using the `requirements.txt` file.
