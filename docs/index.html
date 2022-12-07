@@ -154,7 +154,7 @@
             
         <div class="content">
             <p>
-                We present Interpolated SelectionConv, a method for transfering the weights of 2D CNNs to graph networks that operate specifically for surfaces, allowing for applications in spherical images and 3D meshes.
+                We present Interpolated SelectionConv, a method for transferring the weights of 2D CNNs to graph networks that operate specifically for surfaces, allowing for applications in spherical images and 3D meshes.
             </p>
 			<p>
 				This paper builds off our previous work <b>SelectionConv</b>, which you can learn more about at our <a href="https://davidmhart.github.io/SelectionConv/">project page</a>.
@@ -169,11 +169,11 @@
                     With general sampling patterns, however, node relationships do not lie so cleanly along specific axes. 
                     Thus, it is beneficial to be able to interpolate between multiple selections. 
                     To do this, we first assign multiple edges to a single node with each edge having a different selection (i.e., we assign the same source and target node to multiple adjacency matrices). 
-                    Then, we assign each of those edges an edge weight that determines how much the spatial relationship between the nodes matches the given direction.
+                    Then, we assign each of those edges a fractional interpolation value that determines the spatial relationship of the node relative to neighboring directions.
 				</p>       
 
                 <p>
-                    For example, if an angular interpolation is used, the edge between the given source and target node shown in diagram would have selections of both 2 and 3. 
+                    For example, if an angular interpolation is used, the edge between the given source and target node shown in the diagram would have selections of both 2 and 3. 
                     Specifically, it would have selection weights of \( w_2 = \frac{\theta_3}{\theta_2+\theta_3} \) and \( w_3 = 1 - w_2 \).
                 </p>
                 
@@ -193,7 +193,7 @@
 					By using interpolated selections, our graph structures can be defined for generic point cloud structures, such as those generated from sampling a spherical surface or a 3D mesh.
                     By defining the graph structure in 3D space, and then making selection assignments based on the local planar projection for each individual node, our interpolated SelectionConv can accurately represent oriented convolution on surfaces.
                     This creates one cohesive framework that does not require designing a specific projection for each unique surface.
-                    Additionally, just like the original SelectionConv we can transfer weights from networks trained on 2D images to our graph-based network.
+                    Additionally, just like the original SelectionConv, we can transfer weights from networks trained on 2D images to our graph-based network.
                 </p>       
 
             </div>
@@ -204,7 +204,7 @@
         <div class="section-title">Results</div>
             <div class="content">
                 <p>
-                    Our approach is general enough to work with many 2D network architecture and tasks. Thus, we illustrate the results of transferring 2D weights for different tasks to our networks for spherical images and 3D meshes.
+                    Our approach is general enough to work with many 2D network architectures and tasks. Thus, we illustrate the results of transferring 2D weights for different tasks to our networks for spherical images and 3D meshes.
 				</p>                	        
             </div>
         
@@ -313,9 +313,9 @@
 		    
             <div class="content">
                 <p>
-				    We evaluate our method in perfoming segmentation using the Stanford 2D-3D-S dataset. It consists of equirectangular images of various indoor scenes with 13 different classes. 
-                    We compare to various methods designed specifcally for spheres.
-                    Even after a simple direct transfer, our approach is competive with the state-of-the-art methods.
+				    We evaluate our method in performing segmentation using the Stanford 2D-3D-S dataset. It consists of equirectangular images of various indoor scenes with 13 different classes. 
+                    We compare to various methods designed specifically for spheres.
+                    Even after a simple direct transfer, our approach is competitive with the state-of-the-art methods.
 				</p>
             </div>
                 
@@ -372,7 +372,7 @@
                 <p>
 					Lastly, we demonstrate the ability of our method to generalize to general surfaces by stylizing 3D meshes. 
 					In the original SelectionConv work, a UV edge-pairing process was required to determine edges across seams in the texture map. This process failed to remove all artifacts along seam boundaries and was time consuming for high-polygon-count meshes. 
-					Our new approach avoids this computationally expensive step while achieving far better consistency along UV seams
+					Our new approach avoids this computationally-expensive step while achieving far better consistency along UV seams
 					since the edges and selections are made in 3D space, rather than on the topologically complex 2D texture map.
 				</p>
             </div>
@@ -390,10 +390,10 @@
 				</tr>
 				<tr>
 				<td>
-				<model-viewer alt="Teddy Bear" src="meshes/teddy.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				<model-viewer alt="Teddy Bear" src="meshes/teddy.glb" poster="meshes/teddy.webp" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
 				</td>
 				<td>
-				<model-viewer alt="Teddy Bear Naive Stylization" src="meshes/teddy_naive.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				<model-viewer alt="Teddy Bear Naive Stylization" src="meshes/teddy_naive.glb" poster="meshes/teddy_naive.webp" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
 				</td>
 				</tr>
 				<tr>
@@ -401,10 +401,10 @@
 				</tr>
 				<tr>
 				<td>
-				<model-viewer alt="Teddy Bear SelectionConv Stylization" src="meshes/teddy_selectionconv.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				<model-viewer alt="Teddy Bear SelectionConv Stylization" src="meshes/teddy_selectionconv.glb" poster="meshes/teddy_selectionconv.webp" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
 				</td>
 				<td>
-				<model-viewer alt="Teddy Bear Interpolated SelectionConv Stylization" src="meshes/teddy_new.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				<model-viewer alt="Teddy Bear Interpolated SelectionConv Stylization" src="meshes/teddy_new.glb" poster="meshes/teddy_new.webp" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
 				</td>
 				</tr>
 				
@@ -452,7 +452,7 @@
 				</tr>
 				<tr>
 				<td>
-				<model-viewer alt="Crow" src="meshes/crow.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				<model-viewer alt="Crow" src="meshes/crow.glb" poster="meshes/crow.webp" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
 				</td>
 				<td>
 				<img src="images/style4.jpg" style="width:50%;"></td>
@@ -462,10 +462,10 @@
 				</tr>
 				<tr>
 				<td>
-				<model-viewer alt="Crow Low Res Naive Stylization" src="meshes/crow_naive_lowres.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				<model-viewer alt="Crow Low Res Naive Stylization" src="meshes/crow_naive_lowres.glb" poster="meshes/crow_naive_lowres.webp" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
 				</td>
 				<td>
-				<model-viewer alt="Crow Low Res Interpolated SelectionConv Stylization" src="meshes/crow_ours_lowres.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				<model-viewer alt="Crow Low Res Interpolated SelectionConv Stylization" src="meshes/crow_ours_lowres.glb" poster="meshes/crow_ours_lowres.webp" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
 				</td>
 				</tr>
 				<tr>
@@ -473,10 +473,10 @@
 				</tr>
 				<tr>
 				<td>
-				<model-viewer alt="Crow High Res Naive Stylization" src="meshes/crow_naive_highres.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				<model-viewer alt="Crow High Res Naive Stylization" src="meshes/crow_naive_highres.glb" poster="meshes/crow_naive_highres.webp" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
 				</td>
 				<td>
-				<model-viewer alt="Crow Low Res Interpolated SelectionConv Stylization" src="meshes/crow_ours_highres.glb" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
+				<model-viewer alt="Crow Low Res Interpolated SelectionConv Stylization" src="meshes/crow_ours_highres.glb" poster="meshes/crow_ours_highres.webp" ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" seamless-poster shadow-intensity="1" camera-controls enable-pan></model-viewer>
 				</td>
 				</tr>
 				
