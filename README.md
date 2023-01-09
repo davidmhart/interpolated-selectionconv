@@ -3,7 +3,7 @@ The original Pytorch Geometric implementation for Interpolated SelectionConv for
 
 [Project Page](https://davidmhart.github.io/interpolated-selectionconv/)
 
-[Paper](http://arxiv.org/abs/2210.10123)
+[Paper](https://openaccess.thecvf.com/content/WACV2023/papers/Hart_Interpolated_SelectionConv_for_Spherical_Images_and_Surfaces_WACV_2023_paper.pdf)
 
 ![](teaser.png)
 
@@ -49,3 +49,16 @@ Training:
 
 ### Mesh Style Transfer
 Mesh style transfer has also been improved using the interpolated graph structure. The mesh style transfer script can be found at `scripts/styletransfer_mesh.py` and uses the same style transfer setup steps as spherical images. Download our [Mesh Data](https://drive.google.com/file/d/1inUhabyPW_fz_2L6FSomxy9-1EQsi8l6/view?usp=sharing) to run the same experiments as in our paper. Use the `-N` command to change the sampling density on the mesh. You can also add new meshes by adding them to the `mesh_data/` folder and modifying the `mesh_config.py` file.
+
+## Citation
+
+```
+@InProceedings{Hart_2023_WACV,
+    author    = {Hart, David and Whitney, Michael and Morse, Bryan},
+    title     = {Interpolated SelectionConv for Spherical Images and Surfaces},
+    booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+    month     = {January},
+    year      = {2023},
+    pages     = {321-330}
+}
+```
